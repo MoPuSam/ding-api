@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oulam.dingding.dao.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.oulam.dingding.bean.Department" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="d_id" property="dId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, d_id, name, parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from dd_department
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from dd_department
+    where d_id = #{dId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from dd_department
+    where name = #{name,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from dd_department
+  </select>
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT INTO dd_department (
+    d_id,
+    name,
+    parentid
+    )
+    VALUES
+    <foreach collection="list" item="item" index="index" separator="," >
+      (
+      #{item.dId,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR},
+      #{item.parentid,jdbcType=BIGINT}
+      )
+    </foreach>
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dd_department
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.oulam.dingding.bean.Department" >
+    insert into dd_department (id, d_id, name, 
+      parentid)
+    values (#{id,jdbcType=BIGINT}, #{dId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oulam.dingding.bean.Department" >
+    insert into dd_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dId != null" >
+        d_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="parentid != null" >
+        parentid
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dId != null" >
+        #{dId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oulam.dingding.bean.Department" >
+    update dd_department
+    <set >
+      <if test="dId != null" >
+        d_id = #{dId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oulam.dingding.bean.Department" >
+    update dd_department
+    set d_id = #{dId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

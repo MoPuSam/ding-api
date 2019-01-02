@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oulam.dingding.dao.Y_MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.oulam.dingding.bean.Y_Message" >
+    <id column="latoId" property="latoid" jdbcType="DECIMAL" />
+    <result column="formId" property="formid" jdbcType="DECIMAL" />
+    <result column="recOrder" property="recorder" jdbcType="DOUBLE" />
+    <result column="latoVersion" property="latoversion" jdbcType="DECIMAL" />
+    <result column="latoLocked" property="latolocked" jdbcType="BIT" />
+    <result column="f1" property="f1" jdbcType="VARCHAR" />
+    <result column="f2" property="f2" jdbcType="VARCHAR" />
+    <result column="f3" property="f3" jdbcType="VARCHAR" />
+    <result column="f4" property="f4" jdbcType="BIT" />
+    <result column="f5" property="f5" jdbcType="VARCHAR" />
+    <result column="m_creator_account" property="mCreatorAccount" jdbcType="VARCHAR" />
+    <result column="m_updater_account" property="mUpdaterAccount" jdbcType="VARCHAR" />
+    <result column="m_creator_id" property="mCreatorId" jdbcType="BIGINT" />
+    <result column="m_create_time" property="mCreateTime" jdbcType="TIMESTAMP" />
+    <result column="m_updater_id" property="mUpdaterId" jdbcType="BIGINT" />
+    <result column="m_update_time" property="mUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="m_process_inst_id" property="mProcessInstId" jdbcType="BIGINT" />
+    <result column="m_org_id" property="mOrgId" jdbcType="BIGINT" />
+    <result column="f6" property="f6" jdbcType="VARCHAR" />
+    <result column="f7" property="f7" jdbcType="VARCHAR" />
+    <result column="f8" property="f8" jdbcType="VARCHAR" />
+    <result column="f9" property="f9" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    latoId, formId, recOrder, latoVersion, latoLocked, f1, f2, f3, f4, f5, m_creator_account, 
+    m_updater_account, m_creator_id, m_create_time, m_updater_id, m_update_time, m_process_inst_id, 
+    m_org_id, f6, f7, f8, f9
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from t10001_c10201
+    where latoId = #{latoid,jdbcType=DECIMAL}
+  </select>
+
+  <select id="getMessageNotFinish" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t10001_c10201
+    where f9 = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from t10001_c10201
+    where latoId = #{latoid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.oulam.dingding.bean.Y_Message" >
+    insert into t10001_c10201 (latoId, formId, recOrder, 
+      latoVersion, latoLocked, f1, 
+      f2, f3, f4, f5, 
+      m_creator_account, m_updater_account, m_creator_id, 
+      m_create_time, m_updater_id, m_update_time, 
+      m_process_inst_id, m_org_id, f6, 
+      f7, f8, f9)
+    values (#{latoid,jdbcType=DECIMAL}, #{formid,jdbcType=DECIMAL}, #{recorder,jdbcType=DOUBLE}, 
+      #{latoversion,jdbcType=DECIMAL}, #{latolocked,jdbcType=BIT}, #{f1,jdbcType=VARCHAR}, 
+      #{f2,jdbcType=VARCHAR}, #{f3,jdbcType=VARCHAR}, #{f4,jdbcType=BIT}, #{f5,jdbcType=VARCHAR}, 
+      #{mCreatorAccount,jdbcType=VARCHAR}, #{mUpdaterAccount,jdbcType=VARCHAR}, #{mCreatorId,jdbcType=BIGINT}, 
+      #{mCreateTime,jdbcType=TIMESTAMP}, #{mUpdaterId,jdbcType=BIGINT}, #{mUpdateTime,jdbcType=TIMESTAMP}, 
+      #{mProcessInstId,jdbcType=BIGINT}, #{mOrgId,jdbcType=BIGINT}, #{f6,jdbcType=VARCHAR}, 
+      #{f7,jdbcType=VARCHAR}, #{f8,jdbcType=VARCHAR}, #{f9,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oulam.dingding.bean.Y_Message" >
+    insert into t10001_c10201
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="latoid != null" >
+        latoId,
+      </if>
+      <if test="formid != null" >
+        formId,
+      </if>
+      <if test="recorder != null" >
+        recOrder,
+      </if>
+      <if test="latoversion != null" >
+        latoVersion,
+      </if>
+      <if test="latolocked != null" >
+        latoLocked,
+      </if>
+      <if test="f1 != null" >
+        f1,
+      </if>
+      <if test="f2 != null" >
+        f2,
+      </if>
+      <if test="f3 != null" >
+        f3,
+      </if>
+      <if test="f4 != null" >
+        f4,
+      </if>
+      <if test="f5 != null" >
+        f5,
+      </if>
+      <if test="mCreatorAccount != null" >
+        m_creator_account,
+      </if>
+      <if test="mUpdaterAccount != null" >
+        m_updater_account,
+      </if>
+      <if test="mCreatorId != null" >
+        m_creator_id,
+      </if>
+      <if test="mCreateTime != null" >
+        m_create_time,
+      </if>
+      <if test="mUpdaterId != null" >
+        m_updater_id,
+      </if>
+      <if test="mUpdateTime != null" >
+        m_update_time,
+      </if>
+      <if test="mProcessInstId != null" >
+        m_process_inst_id,
+      </if>
+      <if test="mOrgId != null" >
+        m_org_id,
+      </if>
+      <if test="f6 != null" >
+        f6,
+      </if>
+      <if test="f7 != null" >
+        f7,
+      </if>
+      <if test="f8 != null" >
+        f8,
+      </if>
+      <if test="f9 != null" >
+        f9,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="latoid != null" >
+        #{latoid,jdbcType=DECIMAL},
+      </if>
+      <if test="formid != null" >
+        #{formid,jdbcType=DECIMAL},
+      </if>
+      <if test="recorder != null" >
+        #{recorder,jdbcType=DOUBLE},
+      </if>
+      <if test="latoversion != null" >
+        #{latoversion,jdbcType=DECIMAL},
+      </if>
+      <if test="latolocked != null" >
+        #{latolocked,jdbcType=BIT},
+      </if>
+      <if test="f1 != null" >
+        #{f1,jdbcType=VARCHAR},
+      </if>
+      <if test="f2 != null" >
+        #{f2,jdbcType=VARCHAR},
+      </if>
+      <if test="f3 != null" >
+        #{f3,jdbcType=VARCHAR},
+      </if>
+      <if test="f4 != null" >
+        #{f4,jdbcType=BIT},
+      </if>
+      <if test="f5 != null" >
+        #{f5,jdbcType=VARCHAR},
+      </if>
+      <if test="mCreatorAccount != null" >
+        #{mCreatorAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mUpdaterAccount != null" >
+        #{mUpdaterAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mCreatorId != null" >
+        #{mCreatorId,jdbcType=BIGINT},
+      </if>
+      <if test="mCreateTime != null" >
+        #{mCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mUpdaterId != null" >
+        #{mUpdaterId,jdbcType=BIGINT},
+      </if>
+      <if test="mUpdateTime != null" >
+        #{mUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mProcessInstId != null" >
+        #{mProcessInstId,jdbcType=BIGINT},
+      </if>
+      <if test="mOrgId != null" >
+        #{mOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="f6 != null" >
+        #{f6,jdbcType=VARCHAR},
+      </if>
+      <if test="f7 != null" >
+        #{f7,jdbcType=VARCHAR},
+      </if>
+      <if test="f8 != null" >
+        #{f8,jdbcType=VARCHAR},
+      </if>
+      <if test="f9 != null" >
+        #{f9,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oulam.dingding.bean.Y_Message" >
+    update t10001_c10201
+    <set >
+      <if test="formid != null" >
+        formId = #{formid,jdbcType=DECIMAL},
+      </if>
+      <if test="recorder != null" >
+        recOrder = #{recorder,jdbcType=DOUBLE},
+      </if>
+      <if test="latoversion != null" >
+        latoVersion = #{latoversion,jdbcType=DECIMAL},
+      </if>
+      <if test="latolocked != null" >
+        latoLocked = #{latolocked,jdbcType=BIT},
+      </if>
+      <if test="f1 != null" >
+        f1 = #{f1,jdbcType=VARCHAR},
+      </if>
+      <if test="f2 != null" >
+        f2 = #{f2,jdbcType=VARCHAR},
+      </if>
+      <if test="f3 != null" >
+        f3 = #{f3,jdbcType=VARCHAR},
+      </if>
+      <if test="f4 != null" >
+        f4 = #{f4,jdbcType=BIT},
+      </if>
+      <if test="f5 != null" >
+        f5 = #{f5,jdbcType=VARCHAR},
+      </if>
+      <if test="mCreatorAccount != null" >
+        m_creator_account = #{mCreatorAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mUpdaterAccount != null" >
+        m_updater_account = #{mUpdaterAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="mCreatorId != null" >
+        m_creator_id = #{mCreatorId,jdbcType=BIGINT},
+      </if>
+      <if test="mCreateTime != null" >
+        m_create_time = #{mCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mUpdaterId != null" >
+        m_updater_id = #{mUpdaterId,jdbcType=BIGINT},
+      </if>
+      <if test="mUpdateTime != null" >
+        m_update_time = #{mUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mProcessInstId != null" >
+        m_process_inst_id = #{mProcessInstId,jdbcType=BIGINT},
+      </if>
+      <if test="mOrgId != null" >
+        m_org_id = #{mOrgId,jdbcType=BIGINT},
+      </if>
+      <if test="f6 != null" >
+        f6 = #{f6,jdbcType=VARCHAR},
+      </if>
+      <if test="f7 != null" >
+        f7 = #{f7,jdbcType=VARCHAR},
+      </if>
+      <if test="f8 != null" >
+        f8 = #{f8,jdbcType=VARCHAR},
+      </if>
+      <if test="f9 != null" >
+        f9 = #{f9,jdbcType=BIT},
+      </if>
+    </set>
+    where latoId = #{latoid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oulam.dingding.bean.Y_Message" >
+    update t10001_c10201
+    set formId = #{formid,jdbcType=DECIMAL},
+      recOrder = #{recorder,jdbcType=DOUBLE},
+      latoVersion = #{latoversion,jdbcType=DECIMAL},
+      latoLocked = #{latolocked,jdbcType=BIT},
+      f1 = #{f1,jdbcType=VARCHAR},
+      f2 = #{f2,jdbcType=VARCHAR},
+      f3 = #{f3,jdbcType=VARCHAR},
+      f4 = #{f4,jdbcType=BIT},
+      f5 = #{f5,jdbcType=VARCHAR},
+      m_creator_account = #{mCreatorAccount,jdbcType=VARCHAR},
+      m_updater_account = #{mUpdaterAccount,jdbcType=VARCHAR},
+      m_creator_id = #{mCreatorId,jdbcType=BIGINT},
+      m_create_time = #{mCreateTime,jdbcType=TIMESTAMP},
+      m_updater_id = #{mUpdaterId,jdbcType=BIGINT},
+      m_update_time = #{mUpdateTime,jdbcType=TIMESTAMP},
+      m_process_inst_id = #{mProcessInstId,jdbcType=BIGINT},
+      m_org_id = #{mOrgId,jdbcType=BIGINT},
+      f6 = #{f6,jdbcType=VARCHAR},
+      f7 = #{f7,jdbcType=VARCHAR},
+      f8 = #{f8,jdbcType=VARCHAR},
+      f9 = #{f9,jdbcType=BIT}
+    where latoId = #{latoid,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateBatchByPrimaryKey" parameterType="java.util.List" >
+    update t10001_c10201
+    set
+        f9 = 1
+    where latoId in
+    <foreach collection="list" item="item" index="index"
+             separator="," open="(" close=")">
+      #{item.latoid}
+    </foreach>
+  </update>
+</mapper>
